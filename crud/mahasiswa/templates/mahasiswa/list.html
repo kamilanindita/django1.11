@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock title %}
+
+{% block contents %}
+    <h1>{{ page_title }}</h1>
+    <a class="btn btn-primary" href="{% url 'mahasiswa:create' %}">Tambah</a>
+    <br><br>
+    <table style="border: 1px solid;">
+        <tr>
+            <td>#</td>
+            <td>NIM</td>
+            <td>Nama Depan</td>
+            <td>Nama Belakang</td>
+            <td>Prodi</td>
+            <td>Alamat</td>
+        </tr>
+        {% for mhs in semua_mahasiswa %}
+	    	<tr>
+              <td scope="row">{{forloop.counter}}</td>
+              <td>{{mhs.nim}}</td>
+		      <td>{{mhs.nama_depan}}</td>
+		      <td>{{mhs.nama_belakang}}</td>
+              <td>{{mhs.prodi}}</td>
+              <td>{{mhs.alamat}}</td>
+              <td><a  href="{% url 'mahasiswa:update' mhs.id %}" title="">Update</a>
+		      <td><a  href="{% url 'mahasiswa:delete' mhs.id %}">Delete</a>
+		    </tr>
+	    {% endfor %}
+    </table>
+{% endblock contents %}
